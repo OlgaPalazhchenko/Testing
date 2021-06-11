@@ -12,7 +12,7 @@ Temperature_K = 293 # K
 # these solve for the log form of the hydrolysis constants for iron,
 # e.g.,
 
- # Fe2 + H2O = Fe(OH)+ + H+ 
+# Fe2 + H2O = Fe(OH)+ + H+ 
 # K = Fe(OH)*a1 + * H* a1 / Fe2*a2
 # FeOH*a1 = K * Fe*a2 / H*a1
 # Fe(OH)*a1 / Fe2+ * a2  = K / H * a1
