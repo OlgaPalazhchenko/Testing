@@ -46,17 +46,60 @@ K_FeOH_hydr = 10 ** (np.polyval(KFeOHPOLYNOMIAL, Temperature_K))
 K_FeOH2_hydr = 10 ** (np.polyval(KFeOH2POLYNOMIAL, Temperature_K))
 K_FeOH3_hydr = 10 ** (np.polyval(KFeOH3POLYNOMIAL, Temperature_K))
 
-# Evaluate the above constants at a temperature from the Tremaine & LeBlanc
+# Evaluating the above constants at a temperature from the Tremaine & LeBlanc
 # paper to make sure they are correct 
-# (they are...but you should be able to show this)
 
-# play around with more recent poly1d method...you can find documentation
-# for it using above link, just search for poly1d
+import math
 
-# example of new function, poly1d
-K_FeOH_hydr = np.poly1d(KFeOHPOLYNOMIAL)
-K_FeOH_hydr = 10 ** K_FeOH_hydr(Temperature_K)
+print('The logarithmic equilibrium constants at a temperature of' , Temperature_K,'K' '\n'
+'from the Tremaine & LeBlanc paper using the old method, polyval, for' '\n'
+'FeOH, FeOH2 and FeOH3, respectively, are:')
+print(math.log10(K_FeOH_hydr), ',' ,math.log10(K_FeOH2_hydr), 'and', 
+    math.log10(K_FeOH3_hydr), '.',)
 
-# Code up the constats using new method and put them all into a function form
-# input sould be temperature, output should be the constants
+#Making a code using the new method that puts them into a function form
+#The input is temperature, the output is the constants
 
+#example of new function, poly1d
+#K_FeOH_hydr = np.poly1d(KFeOHPOLYNOMIAL)
+#K_FeOH_hydr = 10 ** K_FeOH_hydr(Temperature_K)
+
+
+while True:
+    input_temperature = int(input('\n'
+'Input one of the following temperatures (in Kelvin): '
+'373, 423, 473, 523, 573' 
+'\n'))
+    if input_temperature == 373:
+        print('The temperature that was inputted was: ', input_temperature,'K')
+        break
+    elif input_temperature == 423:
+        print('The temperature that was inputted was: ', input_temperature,'K')
+        break
+    elif input_temperature == 473:
+        print('The temperature that was inputted was: ', input_temperature,'K')
+        break  
+    elif input_temperature == 523:
+        print('The temperature that was inputted was: ', input_temperature,'K')
+        break
+    elif input_temperature == 573:
+        print('The temperature that was inputted was: ', input_temperature,'K')
+        break
+    else:
+        print('This is an invalid input. Please try again.')
+
+LOG_K_FeOH_hydr = np.poly1d(KFeOHPOLYNOMIAL)
+LOG_K_FeOH2_hydr = np.poly1d(KFeOH2POLYNOMIAL)
+LOG_K_FeOH3_hydr = np.poly1d(KFeOH3POLYNOMIAL)
+
+K_FeOH_hydr = 10 ** (LOG_K_FeOH_hydr(input_temperature))
+K_FeOH_hydr = 10 ** (LOG_K_FeOH_hydr(input_temperature))
+K_FeOH_hydr = 10 ** (LOG_K_FeOH_hydr(input_temperature))
+
+print('\n' 'At this temperature, the equilibrium constants' '\n'
+    'for FeOH, FeOH2 and FeOH3, respectively,' '\n'
+    'from the Tremaine & LeBlanc paper using the new method, poly1d, are:')
+    
+print(K_FeOH_hydr)
+print(K_FeOH2_hydr)
+print(K_FeOH3_hydr)
