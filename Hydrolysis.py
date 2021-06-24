@@ -49,24 +49,58 @@ KFeOH3POLYNOMIAL = [
 ' the hyrolysis constants to it'
 '6. print the list' 
 
+#Steps 1 and 2
+
+Temp = 293
+
 def iron_hydrolysis_constants(Temp):
     
+    Exponents_K_FeOH_hydr = np.poly1d(KFeOHPOLYNOMIAL)
+    Exponents_K_FeOH2_hydr = np.poly1d(KFeOH2POLYNOMIAL)
+    Exponents_K_FeOH3_hydr = np.poly1d(KFeOH3POLYNOMIAL)
     
+    Log_K_FeOH_hydr = Exponents_K_FeOH_hydr(Temp)
+    Log_K_FeOH2_hydr = Exponents_K_FeOH2_hydr(Temp)
+    Log_K_FeOH3_hydr = Exponents_K_FeOH3_hydr(Temp)
+
+    K_FeOH_hydr = 10 ** Log_K_FeOH_hydr
+    K_FeOH2_hydr = 10 ** Log_K_FeOH2_hydr
+    K_FeOH3_hydr = 10 ** Log_K_FeOH3_hydr
+
+    return K_FeOH_hydr, K_FeOH2_hydr, K_FeOH3_hydr
+
+print(iron_hydrolysis_constants(Temp))
+
+
+
+
+#Step 3
+
+TempArray =np.array([293, 323, 373, 423, 473, 523])
+
+def iron_hydrolysis_constants(TempArray):
     
-    return None
-      
+  # for iron_hydrolysis_constants in Temp:
+  #     print(iron_hydrolysis_constants)
+    
+    Exponents_K_FeOH_hydr = np.poly1d(KFeOHPOLYNOMIAL)
+    Exponents_K_FeOH2_hydr = np.poly1d(KFeOH2POLYNOMIAL)
+    Exponents_K_FeOH3_hydr = np.poly1d(KFeOH3POLYNOMIAL)
+    
+    Log_K_FeOH_hydr = Exponents_K_FeOH_hydr(TempArray)
+    Log_K_FeOH2_hydr = Exponents_K_FeOH2_hydr(TempArray)
+    Log_K_FeOH3_hydr = Exponents_K_FeOH3_hydr(TempArray)
 
-LOG_K_FeOH_hydr = np.poly1d(KFeOHPOLYNOMIAL)
-LOG_K_FeOH2_hydr = np.poly1d(KFeOH2POLYNOMIAL)
-LOG_K_FeOH3_hydr = np.poly1d(KFeOH3POLYNOMIAL)
+    K_FeOH_hydr = 10 ** Log_K_FeOH_hydr
+    K_FeOH2_hydr = 10 ** Log_K_FeOH2_hydr
+    K_FeOH3_hydr = 10 ** Log_K_FeOH3_hydr
 
-K_FeOH_hydr = 10 ** LOG_K_FeOH_hydr(Temperature_K)
-K_FeOH_hydr = 10 ** LOG_K_FeOH_hydr(Temperature_K)
-K_FeOH_hydr = 10 ** LOG_K_FeOH_hydr(Temperature_K)
+    constants_array = np.array([K_FeOH_hydr,  K_FeOH2_hydr, K_FeOH_hydr])
 
+    Value = np.dot(constants_array, TempArray)
 
+    return Value
 
+#[K_FeOH_hydr, K_FeOH2_hydr, K_FeOH3_hydr]
 
-
-
-
+print(iron_hydrolysis_constants(TempArray))
