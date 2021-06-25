@@ -58,7 +58,7 @@ def iron_hydrolysis_constants(Temp):
     Exponents_K_FeOH_hydr = np.poly1d(KFeOHPOLYNOMIAL)
     Exponents_K_FeOH2_hydr = np.poly1d(KFeOH2POLYNOMIAL)
     Exponents_K_FeOH3_hydr = np.poly1d(KFeOH3POLYNOMIAL)
-    
+
     Log_K_FeOH_hydr = Exponents_K_FeOH_hydr(Temp)
     Log_K_FeOH2_hydr = Exponents_K_FeOH2_hydr(Temp)
     Log_K_FeOH3_hydr = Exponents_K_FeOH3_hydr(Temp)
@@ -73,34 +73,37 @@ print(iron_hydrolysis_constants(Temp))
 
 
 
-
 #Step 3
 
-TempArray =np.array([293, 323, 373, 423, 473, 523])
+Temp_Array = np.array([293, 323, 373, 423, 473, 523])
+Temp_Stack = np.vstack(Temp_Array)
 
-def iron_hydrolysis_constants(TempArray):
-    
-  # for iron_hydrolysis_constants in Temp:
-  #     print(iron_hydrolysis_constants)
+def iron_hydrolysis_constants_(Temp_Stack):
     
     Exponents_K_FeOH_hydr = np.poly1d(KFeOHPOLYNOMIAL)
     Exponents_K_FeOH2_hydr = np.poly1d(KFeOH2POLYNOMIAL)
     Exponents_K_FeOH3_hydr = np.poly1d(KFeOH3POLYNOMIAL)
     
-    Log_K_FeOH_hydr = Exponents_K_FeOH_hydr(TempArray)
-    Log_K_FeOH2_hydr = Exponents_K_FeOH2_hydr(TempArray)
-    Log_K_FeOH3_hydr = Exponents_K_FeOH3_hydr(TempArray)
+    Log_K_FeOH_hydr = Exponents_K_FeOH_hydr(Temp_Stack)
+    Log_K_FeOH2_hydr = Exponents_K_FeOH2_hydr(Temp_Stack)
+    Log_K_FeOH3_hydr = Exponents_K_FeOH3_hydr(Temp_Stack)
 
     K_FeOH_hydr = 10 ** Log_K_FeOH_hydr
     K_FeOH2_hydr = 10 ** Log_K_FeOH2_hydr
     K_FeOH3_hydr = 10 ** Log_K_FeOH3_hydr
+    
+    K_FeOH_hydr_Array = np.array([K_FeOH_hydr])
+    K_FeOH2_hydr_Array = np.array([K_FeOH2_hydr])
+    K_FeOH3_hydr_Array = np.array([K_FeOH3_hydr])
+    
+    K_FeOH_hydr_Stack = np.vstack(K_FeOH_hydr_Array)
+    K_FeOH2_hydr_Stack = np.vstack(K_FeOH2_hydr_Array) 
+    K_FeOH3_hydr_Stack = np.vstack(K_FeOH3_hydr_Array)
+   
+    return K_FeOH_hydr_Stack, K_FeOH2_hydr_Stack, K_FeOH3_hydr_Stack
 
-    constants_array = np.array([K_FeOH_hydr,  K_FeOH2_hydr, K_FeOH_hydr])
-
-    Value = np.dot(constants_array, TempArray)
-
-    return Value
+    #return ARRAY
 
 #[K_FeOH_hydr, K_FeOH2_hydr, K_FeOH3_hydr]
 
-print(iron_hydrolysis_constants(TempArray))
+print(iron_hydrolysis_constants_(Temp_Stack))
