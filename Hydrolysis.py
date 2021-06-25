@@ -5,7 +5,6 @@ Created on Jun 11, 2021
 '''
 import numpy as np
 
-
 #constants
 Temperature_K = 293 # K
 
@@ -69,15 +68,12 @@ def iron_hydrolysis_constants(Temp):
 
     return K_FeOH_hydr, K_FeOH2_hydr, K_FeOH3_hydr
 
-print(iron_hydrolysis_constants(Temp))
-
-
-
 #Step 3
 
 Temp_Array = [293, 323, 373, 423, 473, 523]
 
-def iron_hydrolysis_constants_(Temp_Array):
+def iron_hydrolysis_constants_Part3(Temp_Array):
+    
     
     Exponents_K_FeOH_hydr = np.poly1d(KFeOHPOLYNOMIAL)
     Exponents_K_FeOH2_hydr = np.poly1d(KFeOH2POLYNOMIAL)
@@ -95,9 +91,9 @@ def iron_hydrolysis_constants_(Temp_Array):
     
     return Iron_Constants_Array
 
-print(iron_hydrolysis_constants_(Temp_Array)) #prints FeOH, FeOH2, FeOH3
+print(iron_hydrolysis_constants_Part3(Temp_Array)) #prints FeOH, FeOH2, FeOH3
 
-#print(iron_hydrolysis_constants_(Temp_Array)[0]) #prints FeOH
+#print(iron_hydrolysis_constants_Part3(Temp_Array)[0]) #prints FeOH only
 
 #print(iron_hydrolysis_constants_(Temp_Array)[1]) #prints FeOH2
 
@@ -106,3 +102,31 @@ print(iron_hydrolysis_constants_(Temp_Array)) #prints FeOH, FeOH2, FeOH3
 #print(iron_hydrolysis_constants_(Temp_Array)[0:2]) #prints FeOH and FeOH2
 
 #print(iron_hydrolysis_constants_(Temp_Array)[0:3:2]) #prints FeOH and FeOH3
+
+#part4
+
+def iron_hydrolysis_constants_Part4(Temp_Array):
+    
+    
+    Exponents_K_FeOH_hydr = np.poly1d(KFeOHPOLYNOMIAL)
+    Exponents_K_FeOH2_hydr = np.poly1d(KFeOH2POLYNOMIAL)
+    Exponents_K_FeOH3_hydr = np.poly1d(KFeOH3POLYNOMIAL)
+    
+    Log_K_FeOH_hydr = Exponents_K_FeOH_hydr(Temp_Array)
+    Log_K_FeOH2_hydr = Exponents_K_FeOH2_hydr(Temp_Array)
+    Log_K_FeOH3_hydr = Exponents_K_FeOH3_hydr(Temp_Array)
+
+    K_FeOH_hydr = 10 ** Log_K_FeOH_hydr
+    K_FeOH2_hydr = 10 ** Log_K_FeOH2_hydr
+    K_FeOH3_hydr = 10 ** Log_K_FeOH3_hydr
+    
+    Iron_Constants_Array = np.array([K_FeOH_hydr, K_FeOH2_hydr, K_FeOH3_hydr])
+    
+    Save_Data = []
+    
+    Save_Data.append((Iron_Constants_Array)[0]) #this prints FeOH only - follow format from part 3 above
+    
+    return Save_Data
+
+print(iron_hydrolysis_constants_Part4(Temp_Array)[0]) #this [0] does nothing, just gets rid of array word
+
