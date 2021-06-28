@@ -103,7 +103,8 @@ print(iron_hydrolysis_constants_Part3(Temp_Array)) #prints FeOH, FeOH2, FeOH3
 
 #print(iron_hydrolysis_constants_(Temp_Array)[0:3:2]) #prints FeOH and FeOH3
 
-#part4
+#part4/part 5
+
 
 def iron_hydrolysis_constants_Part4(Temp_Array):
     
@@ -124,9 +125,27 @@ def iron_hydrolysis_constants_Part4(Temp_Array):
     
     Save_Data = []
     
-    Save_Data.append((Iron_Constants_Array)[0]) #this prints FeOH only - follow format from part 3 above
+    Save_Data.append(Iron_Constants_Array) #this prints all constants
+    
+   #Save_Data.append((Iron_Constants_Array)[0]) #this prints FeOH only
+    
+   #Save_Data.append((Iron_Constants_Array)[1]) #this prints FeOH2 only 
+    
+   #Save_Data.append((Iron_Constants_Array)[2]) #this prints FeOH3 only
+    
+   #Save_Data.append((Iron_Constants_Array)[0:2]) #this prints FeOH and FeOH2
+    
+   #Save_Data.append((Iron_Constants_Array)[0:3:2]) #this prints FeOH and FeO3
+    
+   #Save_Data.append((Iron_Constants_Array)[1:3]) #this prints FeOH2 and FeOH3
+    
     
     return Save_Data
 
-print(iron_hydrolysis_constants_Part4(Temp_Array)[0]) #this [0] does nothing, just gets rid of array word
+print('this is the output for part 4', iron_hydrolysis_constants_Part4(Temp_Array)[0])
+
+#print(iron_hydrolysis_constants_Part4(Temp_Array)[2])
+      
+      
+
 
