@@ -50,102 +50,128 @@ KFeOH3POLYNOMIAL = [
 
 #Steps 1 and 2
 
-Temp = 293
+Temperatures_Kelvin = [293, 323, 373, 423, 473, 523, 573]
 
-def iron_hydrolysis_constants(Temp):
+
+def iron_hydrolysis_constants(Temperature):
     
-    Exponents_K_FeOH_hydr = np.poly1d(KFeOHPOLYNOMIAL)
-    Exponents_K_FeOH2_hydr = np.poly1d(KFeOH2POLYNOMIAL)
-    Exponents_K_FeOH3_hydr = np.poly1d(KFeOH3POLYNOMIAL)
-
-    Log_K_FeOH_hydr = Exponents_K_FeOH_hydr(Temp)
-    Log_K_FeOH2_hydr = Exponents_K_FeOH2_hydr(Temp)
-    Log_K_FeOH3_hydr = Exponents_K_FeOH3_hydr(Temp)
-
+    ' input here is ANY temperature, not hard-coded for just that one array'
+    
+    # log_10 K(T) polynomial functions
+    K_FeOH_hydr_plynom = np.poly1d(KFeOHPOLYNOMIAL)
+    K_FeOH2_hydr_polynom = np.poly1d(KFeOH2POLYNOMIAL)
+    K_FeOH3_hydr_polynom = np.poly1d(KFeOH3POLYNOMIAL)
+    
+    ' I do not love the Exponents verbage out front...that does not really mean anything'
+    'to me ... changed to polynom, as these are polynomials'
+    
+    Log_K_FeOH_hydr = K_FeOH_hydr_plynom(Temperature)
+    Log_K_FeOH2_hydr = K_FeOH2_hydr_polynom(Temperature)
+    Log_K_FeOH3_hydr = K_FeOH3_hydr_polynom(Temperature)
+    
+    # Fe2+ hydrolysis constants as function of input temp
     K_FeOH_hydr = 10 ** Log_K_FeOH_hydr
     K_FeOH2_hydr = 10 ** Log_K_FeOH2_hydr
     K_FeOH3_hydr = 10 ** Log_K_FeOH3_hydr
+    
 
     return K_FeOH_hydr, K_FeOH2_hydr, K_FeOH3_hydr
 
-#Step 3
 
-Temp_Array = [293, 323, 373, 423, 473, 523]
-
-def iron_hydrolysis_constants_Part3(Temp_Array):
-    
-    
-    Exponents_K_FeOH_hydr = np.poly1d(KFeOHPOLYNOMIAL)
-    Exponents_K_FeOH2_hydr = np.poly1d(KFeOH2POLYNOMIAL)
-    Exponents_K_FeOH3_hydr = np.poly1d(KFeOH3POLYNOMIAL)
-    
-    Log_K_FeOH_hydr = Exponents_K_FeOH_hydr(Temp_Array)
-    Log_K_FeOH2_hydr = Exponents_K_FeOH2_hydr(Temp_Array)
-    Log_K_FeOH3_hydr = Exponents_K_FeOH3_hydr(Temp_Array)
-
-    K_FeOH_hydr = 10 ** Log_K_FeOH_hydr
-    K_FeOH2_hydr = 10 ** Log_K_FeOH2_hydr
-    K_FeOH3_hydr = 10 ** Log_K_FeOH3_hydr
-    
-    Iron_Constants_Array = np.array([K_FeOH_hydr, K_FeOH2_hydr, K_FeOH3_hydr])
-    
-    return Iron_Constants_Array
-
-print(iron_hydrolysis_constants_Part3(Temp_Array)) #prints FeOH, FeOH2, FeOH3
-
-#print(iron_hydrolysis_constants_Part3(Temp_Array)[0]) #prints FeOH only
-
-#print(iron_hydrolysis_constants_(Temp_Array)[1]) #prints FeOH2
-
-#print(iron_hydrolysis_constants_(Temp_Array)[2]) #prints FeOH3
-
-#print(iron_hydrolysis_constants_(Temp_Array)[0:2]) #prints FeOH and FeOH2
-
-#print(iron_hydrolysis_constants_(Temp_Array)[0:3:2]) #prints FeOH and FeOH3
-
-#part4/part 5
+print (iron_hydrolysis_constants(Temperatures_Kelvin)[0:3])
+'array input direct into func' #results in a weird array output... the for loop prevents this issue
 
 
-def iron_hydrolysis_constants_Part4(Temp_Array):
-    
-    
-    Exponents_K_FeOH_hydr = np.poly1d(KFeOHPOLYNOMIAL)
-    Exponents_K_FeOH2_hydr = np.poly1d(KFeOH2POLYNOMIAL)
-    Exponents_K_FeOH3_hydr = np.poly1d(KFeOH3POLYNOMIAL)
-    
-    Log_K_FeOH_hydr = Exponents_K_FeOH_hydr(Temp_Array)
-    Log_K_FeOH2_hydr = Exponents_K_FeOH2_hydr(Temp_Array)
-    Log_K_FeOH3_hydr = Exponents_K_FeOH3_hydr(Temp_Array)
+' This could get confusing if there are multiple inputs and they are all lists...'
+'This is another way to do it'
 
-    K_FeOH_hydr = 10 ** Log_K_FeOH_hydr
-    K_FeOH2_hydr = 10 ** Log_K_FeOH2_hydr
-    K_FeOH3_hydr = 10 ** Log_K_FeOH3_hydr
-    
-    Iron_Constants_Array = np.array([K_FeOH_hydr, K_FeOH2_hydr, K_FeOH3_hydr])
-    
-    Save_Data = []
-    
-    Save_Data.append(Iron_Constants_Array) #this prints all constants
-    
-    #Save_Data.append((Iron_Constants_Array)[0]) #this prints FeOH only
-    
-   #Save_Data.append((Iron_Constants_Array)[1]) #this prints FeOH2 only 
-    
-   #Save_Data.append((Iron_Constants_Array)[2]) #this prints FeOH3 only
-    
-   #Save_Data.append((Iron_Constants_Array)[0:2]) #this prints FeOH and FeOH2
-    
-   #Save_Data.append((Iron_Constants_Array)[0:3:2]) #this prints FeOH and FeO3
-    
-   #Save_Data.append((Iron_Constants_Array)[1:3]) #this prints FeOH2 and FeOH3
-    
-    
-    return Save_Data
 
-print('this is the output for part 4', iron_hydrolysis_constants_Part4(Temp_Array)[0])
+' looping through :'
 
-#print(iron_hydrolysis_constants_Part4(Temp_Array)[2])
-      
-      
+'empty array'
+
+K_Fe2_at_Ts = []
+
+for Temp in Temperatures_Kelvin:
+    K_Fe2 = iron_hydrolysis_constants(Temp)[0:3]
+    K_Fe2_at_Ts.append(K_Fe2)
+
+print('\n',
+    K_Fe2_at_Ts, '\n Looping through each item in the input array')
+
+    #[0] this prints FeOH only
+    
+    #[1] this prints FeOH2 only
+    
+    #[2] this prints FeOH3 only
+    
+    #[0:2] this prints FeOH and FeOH2
+    
+    #[0:3:2] this prints FeOH and FeOH3
+    
+    #[1:3] this prints FeOH2 and FeOH3
+    
+    #[0:3] this prints FeOH, FeOH2, FeOH3
+
+'For FeOH'
+
+K_FeOH_at_Ts = []
+
+for Temp in Temperatures_Kelvin:
+    K_FeOH = iron_hydrolysis_constants(Temp)[0]
+    K_FeOH_at_Ts.append(K_FeOH)
+
+print(K_FeOH_at_Ts)
+
+
+'For FeOH2'
+
+K_FeOH2_at_Ts = []
+
+for Temp in Temperatures_Kelvin:
+    K_FeOH2 = iron_hydrolysis_constants(Temp)[1]
+    K_FeOH2_at_Ts.append(K_FeOH2)
+
+print(K_FeOH2_at_Ts)
+
+'For FeOH3'
+
+K_FeOH3_at_Ts = []
+
+for Temp in Temperatures_Kelvin:
+    K_FeOH3 = iron_hydrolysis_constants(Temp)[2]
+    K_FeOH3_at_Ts.append(K_FeOH3)
+
+print(K_FeOH3_at_Ts)
+
+
+
+
+a = [1,2,3]
+# b = [0,1,4]
+
+
+' This is what I mean by having multiple lists as input...there are list on list \
+operations (multiplying, adding, etc.) that will not work unless specifically \
+coded to do so... but that is a cool thing to know for simple functions with list \
+input! '
+
+def test(x):
+    answer0 = 2 * a
+    
+    # this operation doesn't work by multiplying 2 by each list item
+    # instead it duplicates list 
+    # list input worked for your original function becaus of the np.polyval
+    # function.... numpy arrays are designed for those calcs
+    # I would recommend doing the looping through and appending method instead
+    print (answer0)
+    return answer0      
+
+test (a)
+
+
+
+
+
 
 
